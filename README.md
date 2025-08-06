@@ -1,60 +1,140 @@
 
 
-# Backend - Teste Técnico Flutter + Node.js
+# Teste Técnico – Flutter + Node.js
 
-Este é um backend simples em Node.js (Express.js) criado para servir como intermediário entre um app Flutter 
-e uma API pública de dados (JSONPlaceholder).
-
----
-
-## Como rodar o backend
-
-1. Clone ou baixe este repositório.
-2. Abra o terminal (Prompt de Comando ou PowerShell) e navegue até a pasta do backend:
-
-   ```
-   cd caminho\para\backend
-   ```
-3. Instale as dependências:
-
-   ```
-   npm install
-   ```
-4. Inicie o servidor:
-
-   ```
-   npm start
-   ```
-
-   O servidor irá rodar por padrão em [http://localhost:3000](http://localhost:3000).
+Este projeto é uma solução para o teste técnico, onde o objetivo é criar um backend em Node.js (Express.js) que consome uma API pública(JSONPlaceholder) e expõe os dados para serem utilizados em um aplicativo Flutter. O app Flutter consome esses dados via HTTP e exibe em uma interface simples, com botão para recarregar os dados.
 
 ---
 
-## Endpoint disponível
+## 📁 Estrutura do Projeto
 
-* **GET `/api/data`**
-  Retorna a lista de usuários obtida da API pública JSONPlaceholder.
+```
 
-  Exemplo:
+/
+├── backend/           # Backend Node.js (Express)
+│   ├── index.js
+│   ├── package.json
+│   └── Dockerfile
+│
+└── flutter\_app/       # App Flutter (frontend)
+├── lib/
+│   └── main.dart
+├── pubspec.yaml
 
-  ```
-  http://localhost:3000/api/data
-  ```
-
----
-
-## Estrutura do projeto
-
-* `index.js`: Código principal do servidor Express
-* `package.json`: Dependências e scripts
-* `README.md`: Este arquivo
+````
 
 ---
 
-## Observações
+## 🚀 Como Rodar o Projeto
 
-* O backend está preparado para ser consumido localmente por um app Flutter (ou qualquer frontend).
-* Para uso em emulador Android, configure a URL no Flutter como `http://10.0.2.2:3000/api/data`.
-* Pode ser facilmente containerizado via Docker para rodar em produção ou na nuvem.
+### Pré-requisitos
+
+- Node.js (v18 ou superior)
+- NPM (Node Package Manager)
+- Flutter SDK (3.x)
+- (Opcional) Docker Desktop
 
 ---
+
+### 1. Rodando o Backend (Node.js)
+
+```sh
+cd backend
+npm install
+npm start
+````
+
+* O backend ficará disponível em:
+  `http://localhost:3000/api/data`
+
+#### Docker (opcional):
+
+```sh
+cd backend
+docker build -t backend-flutter-teste .
+docker run -p 3000:3000 backend-flutter-teste
+```
+
+---
+
+### 2. Rodando o App Flutter
+
+```sh
+cd flutter_app
+flutter pub get
+flutter run -d chrome
+```
+
+* O app por padrão está configurado para buscar dados em `http://localhost:3000/api/data`.
+* Se rodar no **emulador Android**, use `http://10.0.2.2:3000/api/data` no código.
+
+---
+
+## 🧩 Tecnologias Utilizadas
+
+* **Backend:** Node.js, Express.js, Axios, CORS
+* **Frontend:** Flutter, http package
+* **API Pública:** JSONPlaceholder ([https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users))
+* **Docker:** (para containerizar o backend, opcional)
+
+---
+
+## 🔗 Endpoints Backend
+
+* **GET /api/data**
+  Retorna um array de usuários da API pública JSONPlaceholder.
+
+---
+
+## 💻 Funcionalidades do App Flutter
+
+* Exibe uma lista de usuários vindos da API.
+* Botão flutuante para recarregar os dados da API.
+* Loading e tratamento básico de erro de conexão.
+
+---
+
+## 📦 Estrutura Recomendada de Pastas
+
+```
+/backend
+  - index.js
+  - package.json
+  - Dockerfile
+
+/flutter_app
+  - lib/main.dart
+  - pubspec.yaml
+```
+
+---
+
+## 👨‍💻 Como clonar e rodar rapidamente
+
+```sh
+git clone https://github.com/SEUUSUARIO/SEUREPOSITORIO.git
+cd backend
+npm install
+npm start
+
+# Abra outro terminal
+cd flutter_app
+flutter pub get
+flutter run -d chrome
+```
+
+---
+
+## 📝 Observações
+
+* Testado em Windows 10 e Ubuntu.
+* Para rodar tudo em Docker, só o backend precisa ser containerizado.
+* Sugestão: rodar backend primeiro, depois o Flutter.
+* Caso rode em nuvem ou com IP diferente, lembre de ajustar a URL do backend no app Flutter.
+
+---
+
+## 📄 Licença
+
+Este projeto é open-source, use como quiser.
+
